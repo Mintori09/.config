@@ -1,0 +1,12 @@
+  --embed-metadata 
+  --embed-subs 
+  --embed-thumbnail 
+  --embed-chapters 
+  -o "~/Downloads/Youtube/%(title)s.%(ext)s" 
+  --no-check-certificates 
+  --sub-langs "vi.*,en,ja" 
+  --format "bv+ba/b" 
+  --trim-filenames 100 
+  --yes-playlist 
+  --write-sub 
+  --write-auto-sub

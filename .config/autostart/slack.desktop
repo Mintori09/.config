@@ -1,0 +1,19 @@
+[Desktop Entry]
+Categories=GNOME;GTK;Network;InstantMessaging;
+Comment[en_GB]=Slack Desktop
+Comment=Slack Desktop
+Exec=/usr/bin/slack -u --disable-gpu-compositing --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WebRTCPipeWireCapturer --enable-features=WaylandWindowDecorations --disable-features=WaylandFractionalScaleV1 -s %U
+GenericName[en_GB]=Slack Client for Linux
+GenericName=Slack Client for Linux
+Icon=slack
+MimeType=
+Name[en_GB]=Slack
+Name=Slack
+Path=
+StartupNotify=true
+StartupWMClass=Slack
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
