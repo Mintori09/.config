@@ -174,19 +174,23 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "VimLeavePre" }, {
   end,
 })
 
-local supported_filetypes = { markdown = true, text = true, norg = true }
+local supported_filetypes = {
+  markdown = true,
+  text = true,
+  norg = true,
+}
 
-function IBusOff()
-  vim.cmd("silent !ibus engine xkb:us::eng")
+local function IBusOff()
+  vim.cmd("silent !ibus engine BambooUs")
 end
 
-function IBusOn()
+local function IBusOn()
   if supported_filetypes[vim.bo.filetype] then
     vim.cmd("silent !ibus engine Bamboo")
   end
 end
 
-vim.api.nvim_create_augroup("IBusHandler", { clear = true })
+local ibus_group = vim.api.nvim_create_augroup("IbusHandler", { clear = true })
 
 vim.api.nvim_create_autocmd("CmdlineEnter", {
   callback = function()
@@ -195,31 +199,30 @@ vim.api.nvim_create_autocmd("CmdlineEnter", {
       IBusOn()
     end
   end,
-  group = "IbusHandler",
+  group = ibus_group,
 })
 
-vim.api.nvim_create_autocmd({ "CmdlineLeave" }, {
+vim.api.nvim_create_autocmd("CmdlineLeave", {
   pattern = "[/?]",
   callback = function()
     IBusOff()
   end,
-  group = "IBusHandler",
+  group = ibus_group,
 })
 
-vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-  pattern = "*",
+vim.api.nvim_create_autocmd("InsertEnter", {
   callback = function()
     IBusOn()
   end,
-  group = "IBusHandler",
+  group = ibus_group,
 })
 
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-  pattern = "*",
+vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
     IBusOff()
   end,
-  group = "IBusHandler",
+  group = ibus_group,
 })
 
+-- Tắt IBus khi khởi động
 IBusOff()

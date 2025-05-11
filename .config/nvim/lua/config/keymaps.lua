@@ -217,18 +217,6 @@ vim.keymap.set("n", "<leader>-", function()
   require("yazi").yazi()
 end)
 
-local wilder = require("wilder")
-
--- Enable wilder
-wilder.setup({modes = {":", "/", "?"}})
-
--- Keymaps for command-line completion
-map("c", "<Tab>", "wilder#next()", { expr = true, noremap = true, silent = true })
-map("c", "<S-Tab>", "wilder#previous()", { expr = true, noremap = true, silent = true })
-map("c", "<C-n>", "wilder#next()", { expr = true, noremap = true, silent = true })
-map("c", "<C-p>", "wilder#previous()", { expr = true, noremap = true, silent = true })
-map('n', '<F6>', "<cmd>CompilerOpen<cr>", { noremap = true, silent = true })
-
 map('n', '<S-F6>',
      "<cmd>CompilerStop<cr>" 
   .. "<cmd>CompilerRedo<cr>",

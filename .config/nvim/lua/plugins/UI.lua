@@ -209,7 +209,7 @@ return {
         },
       },
       presets = {
-        bottom_search = true,
+        bottom_search = false,
         command_palette = true,
         long_message_to_split = true,
       },
@@ -279,5 +279,6 @@ return {
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     },
   },
-  { "nvim-lua/plenary.nvim", lazy = true }
+  { "nvim-lua/plenary.nvim", lazy = true },
 }
+

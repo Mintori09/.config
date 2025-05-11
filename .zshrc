@@ -1,4 +1,7 @@
 # If you come from bash you might have to change your $PATH.
+export OPENROUTER_API_KEY=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
+GEMINI_API_KEY=AIzaSyB8tTeYhYGgClFWsLJjbgJz182R931EEcs
+YOUTUBE_API_KEY=AIzaSyB8tTeYhYGgClFWsLJjbgJz182R931EEcs
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
@@ -81,6 +84,12 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 # alias ff="nvim $(fzf --preview 'bat --style=numbers --color=always --line-range=:500 {}' --height 70%)"
+alias openrouter_deepseek_v3="aider --model openrouter/deepseek/deepseek-chat-v3-0324:free"
+alias openrouter_deepseek_r1="aider --model openrouter/deepseek/deepseek-r1:free"
+alias openrouter_meta_llama="aider --model openrouter/meta-llama/llama-4-maverick:free"
+alias aider_gemini_pro="aider --model gemini-2.5-pro-exp-03-25"
+# qwen/qwen3-235b-a22b:free
+alias aider_gemini_flash="aider --model openrouter/google/gemini-2.0-flash-exp:free"
 alias x11="env GDK_BACKEND=x11"
 alias si="sudo pacman -S"
 alias empty='echo -n Taking out the trash | pv -qL 10 && rm -rf  ~/.local/share/Trash/files' 
@@ -92,7 +101,6 @@ alias cfz="nvim ~/.zshrc && source ~/.zshrc"
 alias cls="clear"
 alias cfnv="cd ~/.config/nvim && nvim"
 alias obs="cd ~/Documents/my-obsidian/ && nvim"
-alias yt="ytfzf -t -T kitty"
 alias off="shutdown -P 0"
 alias vi="trans -t vi"
 alias vii="trans -t vi -I"
@@ -104,6 +112,7 @@ alias ..="cd .."
 alias syncToOnedrive="rclone sync ~/Documents/Obsidian Onedrive:/02\ _\ Obsidian/"
 alias m=" mpv --shuffle ~/Music/ && exit"
 alias tauri-build="NO_STRP=true pnpm tauri build"
+alias fabric="fabric-ai"
 # unalias lt
 
 # Shell integrations
@@ -144,3 +153,21 @@ function lt() {
 }
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+gitSync() {
+    git add .
+    git commit -m "$1"
+    git push -u origin main
+}
+
+function yt() {
+    date=$(date +'%Y_%m_%d')
+    video_name=$(fabric -y "$1" --metadata | jq -r '.title')
+    safe_title=$(echo "$video_name" | tr -d ':/\\?%*"<>|')
+
+    file_path="$HOME/Documents/Obsidian/01_Document/${date}_${safe_title}.md"
+    echo "Path : $file_path"
+
+    fabric -y "$1" --stream -p extract_lecture | fabric -s -p vi | tee "$file_path"
+    echo "Saved to: $file_path"
+}

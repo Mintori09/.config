@@ -15,7 +15,7 @@ return {
           fish = { "fish_indent" },
           sh = { "shfmt" },
           json = { "prettier" },
-          rust = { "rustfmt" }, -- ✅ Thêm hỗ trợ Rust
+          rust = { "rustfmt" },
         },
         formatters = {
           injected = { options = { ignore_errors = true } },
